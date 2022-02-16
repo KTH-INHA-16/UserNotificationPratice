@@ -7,7 +7,22 @@
 
 import Foundation
 
+enum FileType: String {
+    case jpg, mp4, mp3
+}
+
 enum Identifier: String {
-    case interval
-    case calendar
+    case interval, calendar, action
+}
+
+enum ActionIdentifier: String {
+    case normal, destructive
+}
+
+enum AttachmentIdentifier: String {
+    case image, movie, sound
+}
+
+enum CategoryIdentifier: String {
+    case test
 }

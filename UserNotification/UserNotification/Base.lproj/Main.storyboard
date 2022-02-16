@@ -109,17 +109,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="pJb-Le-LTZ">
-                                <rect key="frame" x="168.5" y="469" width="77" height="32"/>
-                                <segments>
-                                    <segment title="" image="xmark.app" catalog="system"/>
-                                    <segment title="" image="circle" catalog="system"/>
-                                </segments>
-                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jT-Nk-fUo">
-                                <rect key="frame" x="183" y="515" width="48.5" height="31"/>
+                                <rect key="frame" x="183" y="474" width="48.5" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="알람"/>
+                                <connections>
+                                    <action selector="triggerTouchDown:" destination="s8U-zD-HDX" eventType="touchDown" id="7mM-s0-m3z"/>
+                                </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NyZ-gr-tKZ">
                                 <rect key="frame" x="128" y="413" width="158" height="32"/>
@@ -133,17 +129,14 @@
                         <viewLayoutGuide key="safeArea" id="lFx-RM-Ojy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="pJb-Le-LTZ" firstAttribute="top" secondItem="NyZ-gr-tKZ" secondAttribute="bottom" constant="25" id="0ML-d3-fp9"/>
                             <constraint firstItem="9jT-Nk-fUo" firstAttribute="centerX" secondItem="lFx-RM-Ojy" secondAttribute="centerX" id="9FW-Rk-U8E"/>
-                            <constraint firstItem="9jT-Nk-fUo" firstAttribute="top" secondItem="pJb-Le-LTZ" secondAttribute="bottom" constant="15" id="AXe-MU-nC6"/>
-                            <constraint firstItem="pJb-Le-LTZ" firstAttribute="centerX" secondItem="lFx-RM-Ojy" secondAttribute="centerX" id="B03-S6-lzI"/>
+                            <constraint firstItem="9jT-Nk-fUo" firstAttribute="top" secondItem="NyZ-gr-tKZ" secondAttribute="bottom" constant="30" id="J9Y-5M-yNr"/>
                             <constraint firstItem="NyZ-gr-tKZ" firstAttribute="centerX" secondItem="lFx-RM-Ojy" secondAttribute="centerX" id="Jb9-hg-S83"/>
                             <constraint firstItem="NyZ-gr-tKZ" firstAttribute="centerY" secondItem="lFx-RM-Ojy" secondAttribute="centerY" id="ZZ3-N0-cVs"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Action" image="text.redaction" catalog="system" id="gEN-k1-4vU"/>
                     <connections>
-                        <outlet property="actionSegmentControl" destination="pJb-Le-LTZ" id="rm4-ex-TxB"/>
                         <outlet property="attachmentSegmentControl" destination="NyZ-gr-tKZ" id="BHN-yB-Mch"/>
                         <outlet property="triggerButton" destination="9jT-Nk-fUo" id="ERL-gE-NlN"/>
                     </connections>
@@ -175,10 +168,8 @@
     </scenes>
     <resources>
         <image name="calendar" catalog="system" width="128" height="106"/>
-        <image name="circle" catalog="system" width="128" height="121"/>
         <image name="clock" catalog="system" width="128" height="121"/>
         <image name="text.redaction" catalog="system" width="128" height="100"/>
-        <image name="xmark.app" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

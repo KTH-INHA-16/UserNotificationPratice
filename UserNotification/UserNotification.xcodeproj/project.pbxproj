@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0104CCC227BCBD3200F2D459 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0104CCC127BCBD3200F2D459 /* ActionViewController.swift */; };
+		0104CCC527BCD3CF00F2D459 /* example.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0104CCC327BCD3CF00F2D459 /* example.jpg */; };
+		0104CCC627BCD3CF00F2D459 /* example.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0104CCC427BCD3CF00F2D459 /* example.mp4 */; };
+		0104CCCC27BCD90100F2D459 /* example.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0104CCCB27BCD90000F2D459 /* example.mp3 */; };
 		01DEF46027BC81B1000974D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DEF45F27BC81B1000974D6 /* AppDelegate.swift */; };
 		01DEF46227BC81B1000974D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DEF46127BC81B1000974D6 /* SceneDelegate.swift */; };
 		01DEF46427BC81B1000974D6 /* IntervalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DEF46327BC81B1000974D6 /* IntervalViewController.swift */; };
@@ -20,6 +23,9 @@
 
 /* Begin PBXFileReference section */
 		0104CCC127BCBD3200F2D459 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		0104CCC327BCD3CF00F2D459 /* example.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = example.jpg; sourceTree = "<group>"; };
+		0104CCC427BCD3CF00F2D459 /* example.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = example.mp4; sourceTree = "<group>"; };
+		0104CCCB27BCD90000F2D459 /* example.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = example.mp3; sourceTree = "<group>"; };
 		01DEF45C27BC81B1000974D6 /* UserNotification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UserNotification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01DEF45F27BC81B1000974D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01DEF46127BC81B1000974D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +78,9 @@
 				01DEF47327BC8D0A000974D6 /* Identifier.swift */,
 				01DEF47727BC9380000974D6 /* CalendarViewController.swift */,
 				0104CCC127BCBD3200F2D459 /* ActionViewController.swift */,
+				0104CCC327BCD3CF00F2D459 /* example.jpg */,
+				0104CCC427BCD3CF00F2D459 /* example.mp4 */,
+				0104CCCB27BCD90000F2D459 /* example.mp3 */,
 			);
 			path = UserNotification;
 			sourceTree = "<group>";
@@ -134,8 +143,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0104CCC627BCD3CF00F2D459 /* example.mp4 in Resources */,
 				01DEF46C27BC81B2000974D6 /* LaunchScreen.storyboard in Resources */,
+				0104CCC527BCD3CF00F2D459 /* example.jpg in Resources */,
 				01DEF46927BC81B2000974D6 /* Assets.xcassets in Resources */,
+				0104CCCC27BCD90100F2D459 /* example.mp3 in Resources */,
 				01DEF46727BC81B1000974D6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
