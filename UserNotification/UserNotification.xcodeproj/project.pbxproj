@@ -49,6 +49,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0104CCCD27BCDD6D00F2D459 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				01DEF46327BC81B1000974D6 /* IntervalViewController.swift */,
+				01DEF47727BC9380000974D6 /* CalendarViewController.swift */,
+				0104CCC127BCBD3200F2D459 /* ActionViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0104CCCE27BCDD7C00F2D459 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0104CCC327BCD3CF00F2D459 /* example.jpg */,
+				0104CCC427BCD3CF00F2D459 /* example.mp4 */,
+				0104CCCB27BCD90000F2D459 /* example.mp3 */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		0104CCCF27BCDD8900F2D459 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				01DEF47327BC8D0A000974D6 /* Identifier.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
 		01DEF45327BC81B1000974D6 = {
 			isa = PBXGroup;
 			children = (
@@ -68,19 +96,15 @@
 		01DEF45E27BC81B1000974D6 /* UserNotification */ = {
 			isa = PBXGroup;
 			children = (
+				0104CCCF27BCDD8900F2D459 /* Others */,
+				0104CCCE27BCDD7C00F2D459 /* Assets */,
+				0104CCCD27BCDD6D00F2D459 /* ViewControllers */,
 				01DEF45F27BC81B1000974D6 /* AppDelegate.swift */,
 				01DEF46127BC81B1000974D6 /* SceneDelegate.swift */,
-				01DEF46327BC81B1000974D6 /* IntervalViewController.swift */,
 				01DEF46527BC81B1000974D6 /* Main.storyboard */,
 				01DEF46827BC81B2000974D6 /* Assets.xcassets */,
 				01DEF46A27BC81B2000974D6 /* LaunchScreen.storyboard */,
 				01DEF46D27BC81B2000974D6 /* Info.plist */,
-				01DEF47327BC8D0A000974D6 /* Identifier.swift */,
-				01DEF47727BC9380000974D6 /* CalendarViewController.swift */,
-				0104CCC127BCBD3200F2D459 /* ActionViewController.swift */,
-				0104CCC327BCD3CF00F2D459 /* example.jpg */,
-				0104CCC427BCD3CF00F2D459 /* example.mp4 */,
-				0104CCCB27BCD90000F2D459 /* example.mp3 */,
 			);
 			path = UserNotification;
 			sourceTree = "<group>";
