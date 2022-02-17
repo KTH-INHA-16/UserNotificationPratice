@@ -30,6 +30,14 @@ Combine도 간단하게 공부를 해보았지만 어떻게 사용하는지 & �
 1. UIKit으로 프로젝트 개발
 2. Combine을 적절하게 사용해볼 수 있는 사용처(?)
 
+### 어떤 점이 새로웠는가.
+1. 큰틀에서 Combine과 RxSwift는 다르지 않음
+  - Publisher <-> Observable, Subscriber <-> Observer와 매칭(100%는 아닌듯 함)
+2. RxSwift는 DisPosebag있어 메모리 누수와 같은 현상을 쉽게 관리 할 수 있다는 것이 있었는데 Combine은 그렇지는 못함
+  - Combine은 직접 Set<AnyCancellable>을 만들어서 처리를 해주어야 하는 번거로움(?) 있음
+3. UserNotification을 많이 사용해보지 않았고, 직전 프로젝트나 다른 프로젝트에서도 사용해보았는데 어떤 구체적인 것이 있는지 알지 못했었음
+  - 현재는 구체적인 알람 종류, 트리거, Custom Action과 같은 것들에 대해서 알게됨
+
 ## 공부 기록
 
 ### User Notification
