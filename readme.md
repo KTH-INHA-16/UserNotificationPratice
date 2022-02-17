@@ -19,8 +19,9 @@ Action은 총 3가지에 대한 Attchment 체험 가능
 ## Combine을 사용한 이유?
 
 부스트캠프에서는 RxSwift라는 라이브러리를 이용해본적 있음
+Combine도 간단하게 공부를 해보았지만 어떻게 사용하는지 & 얼마나 다른지 잘 모름
 
-→ 리엑티브 프로그래밍을 위함
+→ 리엑티브 프로그래밍을 위함 + Combine에 익숙해주기 위해서!
 
 여기서는 Combine을 공부해보고 User Notification의 Delegate 부분 과 Completion Handler를 Combine으로 처리함.
 
