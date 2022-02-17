@@ -7,8 +7,11 @@
 
 import UIKit
 import UserNotifications
+import Combine
 
 final class ActionViewController: UIViewController {
+    private var disposeBag = Set<AnyCancellable>()
+    private let userNotificationPublicist = UserNotificationPublicist()
     private let userNotificationCenter = UNUserNotificationCenter.current()
     
     @IBOutlet weak var triggerButton: UIButton!
@@ -17,9 +20,26 @@ final class ActionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userNotificationCenter.delegate = self
         configureUI()
         configureUserNotificationCategories()
+        
+        userNotificationPublicist
+            .responseSubject
+            .subscribe(on: DispatchQueue.main, options: nil)
+            .sink { [weak self] response in
+                let alertController = UIAlertController(title: response.actionIdentifier, message: "\(response.actionIdentifier) hello!", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "finish", style: .default, handler: nil)
+                alertController.addAction(alertAction)
+                
+                // action identifier에 따른 구분, action으로 넘어온 delegate아니면 그냥 alert를 띄우지 않음
+                switch response.actionIdentifier {
+                case ActionIdentifier.destructive.rawValue, ActionIdentifier.normal.rawValue:
+                    self?.present(alertController, animated: true, completion: nil)
+                default:
+                    break
+                }
+            }
+            .store(in: &disposeBag)
     }
     
     @IBAction func triggerTouchDown(_ sender: UIButton) {
@@ -29,7 +49,17 @@ final class ActionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        userNotificationAuth()
+        userNotificationPublicist
+            .userNotificationAuth()
+            .sink { success in
+                //상황에 따라 무언가 하게됨
+                switch success {
+                case true:
+                    break
+                case false:
+                    break
+                }
+            }.store(in: &disposeBag)
     }
     
     private func triggerUserNotification(case index: Int) {
@@ -68,23 +98,6 @@ final class ActionViewController: UIViewController {
         }
     }
     
-    private func userNotificationAuth() {
-        userNotificationCenter.requestAuthorization(options: [.sound, .badge, .alert]) { success, error in
-            if let error = error {
-                NSLog(error.localizedDescription)
-                return
-            }
-            
-            //상황에 따라 무언가 하게됨
-            switch success {
-            case true:
-                break
-            case false:
-                break
-            }
-        }
-    }
-    
     // 유저 노티피케이션의 카테고리 설정(Action 추가)
     private func configureUserNotificationCategories() {
         let circle = "circle"
@@ -102,27 +115,5 @@ final class ActionViewController: UIViewController {
         triggerButton.layer.cornerRadius = 6
         triggerButton.layer.borderWidth = 0.8
         triggerButton.layer.borderColor = UIColor.lightGray.cgColor
-    }
-}
-
-extension ActionViewController: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.sound, .banner])
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let alertController = UIAlertController(title: response.actionIdentifier, message: "\(response.actionIdentifier) hello!", preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "finish", style: .default, handler: nil)
-        alertController.addAction(alertAction)
-        
-        // action identifier에 따른 구분, action으로 넘어온 delegate아니면 그냥 alert를 띄우지 않음
-        switch response.actionIdentifier {
-        case ActionIdentifier.destructive.rawValue, ActionIdentifier.normal.rawValue:
-            present(alertController, animated: true, completion: nil)
-        default:
-            break
-        }
-        
-        completionHandler()
     }
 }

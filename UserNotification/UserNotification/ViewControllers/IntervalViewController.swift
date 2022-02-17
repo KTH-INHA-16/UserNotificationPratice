@@ -6,9 +6,11 @@
 //
 
 import UIKit
-import UserNotifications
+import Combine
 
 final class IntervalViewController: UIViewController {
+    private var disposeBag = Set<AnyCancellable>()
+    private let userNotificationPublicist = UserNotificationPublicist()
     private let userNotificationCenter = UNUserNotificationCenter.current()
     
     @IBOutlet weak var triggerButton: UIButton!
@@ -22,7 +24,18 @@ final class IntervalViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userNotificationAuth()
+        
+        userNotificationPublicist
+            .userNotificationAuth()
+            .sink { success in
+                //상황에 따라 무언가 하게됨
+                switch success {
+                case true:
+                    break
+                case false:
+                    break
+                }
+            }.store(in: &disposeBag)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -34,23 +47,6 @@ final class IntervalViewController: UIViewController {
     @IBAction private func triggerTouchDown(_ sender: UIButton) {
         if let text = secondTextField.text, let seconds = Int(text) {
             addUserNotification(seconds: seconds)
-        }
-    }
-    
-    private func userNotificationAuth() {
-        userNotificationCenter.requestAuthorization(options: [.sound, .badge, .alert]) { success, error in
-            if let error = error {
-                NSLog(error.localizedDescription)
-                return
-            }
-            
-            //상황에 따라 무언가 하게됨
-            switch success {
-            case true:
-                break
-            case false:
-                break
-            }
         }
     }
     

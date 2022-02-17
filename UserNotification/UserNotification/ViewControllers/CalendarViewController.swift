@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 final class CalendarViewController: UIViewController {
+    private var disposeBag = Set<AnyCancellable>()
+    private let userNotificationPublicist = UserNotificationPublicist()
     private let userNotificationCenter = UNUserNotificationCenter.current()
     
     @IBOutlet weak var triggerButton: UIButton!
@@ -22,7 +25,17 @@ final class CalendarViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        userNotificationAuth()
+        userNotificationPublicist
+            .userNotificationAuth()
+            .sink { success in
+                //상황에 따라 무언가 하게됨
+                switch success {
+                case true:
+                    break
+                case false:
+                    break
+                }
+            }.store(in: &disposeBag)
     }
     
     @IBAction private func triggerTouchDown(_ sender: UIButton) {
@@ -33,23 +46,6 @@ final class CalendarViewController: UIViewController {
         triggerButton.layer.cornerRadius = 6
         triggerButton.layer.borderWidth = 0.8
         triggerButton.layer.borderColor = UIColor.lightGray.cgColor
-    }
-    
-    private func userNotificationAuth() {
-        userNotificationCenter.requestAuthorization(options: [.sound, .badge, .alert]) { success, error in
-            if let error = error {
-                NSLog(error.localizedDescription)
-                return
-            }
-            
-            //상황에 따라 무언가 하게됨
-            switch success {
-            case true:
-                break
-            case false:
-                break
-            }
-        }
     }
     
     private func userNotificationTrigger(date: Date) {
