@@ -10,12 +10,38 @@ import Combine
 import UserNotifications
 
 final class UserNotificationPublicist: NSObject {
-    private let userNotificationCenter = UNUserNotificationCenter.current()
+    private var disposeBag = Set<AnyCancellable>()
+    let userNotificationCenter = UNUserNotificationCenter.current()
+    let requestSubject = PassthroughSubject<[UNNotificationRequest], Never>()
     let responseSubject = PassthroughSubject<UNNotificationResponse, Never>()
     
     override init() {
         super.init()
         userNotificationCenter.delegate = self
+    }
+    
+    func deleteRequest(identifiers: Array<String>)  {
+        userNotificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
+        pendingRequests()
+            .sink { [weak self] response in
+                self?.requestSubject.send(response)
+            }.store(in: &disposeBag)
+    }
+    
+    func deleteAllRequest() {
+        userNotificationCenter.removeAllPendingNotificationRequests()
+        pendingRequests()
+            .sink { [weak self] response in
+                self?.requestSubject.send(response)
+            }.store(in: &disposeBag)
+    }
+    
+    func pendingRequests() -> Future<[UNNotificationRequest], Never> {
+        return Future<[UNNotificationRequest], Never> { [weak self] promise in
+            self?.userNotificationCenter.getPendingNotificationRequests { requests in
+                return promise(.success(requests))
+            }
+        }
     }
 
     func userNotificationAuth() -> Future<Bool, Never>  {

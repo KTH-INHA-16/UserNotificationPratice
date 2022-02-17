@@ -61,7 +61,7 @@ final class CalendarViewController: UIViewController {
         content.subtitle = "\(date.formatted())에 동작"
         content.body = "이건 \(date.formatted())에 동작하는 알람이야!"
         
-        let request = UNNotificationRequest(identifier: Identifier.calendar.rawValue, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
         userNotificationCenter.add(request) {
             guard let error = $0 else {
