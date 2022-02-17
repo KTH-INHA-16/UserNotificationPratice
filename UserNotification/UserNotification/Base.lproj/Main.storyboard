@@ -174,7 +174,19 @@
                             <constraint firstItem="3Rv-PG-Z1V" firstAttribute="leading" secondItem="oKk-ad-0zK" secondAttribute="leading" id="nQb-ZU-ZNJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Wfm-fh-fV6"/>
+                    <navigationItem key="navigationItem" id="Wfm-fh-fV6">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="kvw-5g-8Dw">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="l7L-7B-URG">
+                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteTouchDown:" destination="YdQ-DX-Meq" eventType="touchDown" id="cAE-uG-VQM"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="listTableView" destination="3Rv-PG-Z1V" id="S5v-wL-RQ2"/>
                     </connections>

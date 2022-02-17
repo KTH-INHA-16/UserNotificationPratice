@@ -50,6 +50,10 @@ final class ListViewController: UIViewController {
         
         userNotificationPublicist.pendingRequests()
     }
+    
+    @IBAction func deleteTouchDown(_ sender: UIButton) {
+        userNotificationPublicist.deleteAllRequest()
+    }
 }
 
 extension ListViewController: UITableViewDataSource {
