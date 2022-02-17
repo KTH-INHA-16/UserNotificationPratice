@@ -19,26 +19,6 @@ final class ListViewController: UIViewController {
         super.viewDidLoad()
         
         userNotificationPublicist
-            .pendingRequests()
-            .receive(on: DispatchQueue.global(), options: nil)
-            .map { results -> [UserRequest] in
-                return results.map { value -> UserRequest in
-                    let time: String
-                    if let trigger = value.trigger as? UNCalendarNotificationTrigger {
-                        time = "\(trigger.dateComponents.year ?? 0)년 \(trigger.dateComponents.month ?? 0)월 \(trigger.dateComponents.day ?? 0)일 \(trigger.dateComponents.hour ?? 0):\(trigger.dateComponents.minute ?? 0)"
-                    } else {
-                        time = "없음"
-                    }
-                    
-                    return UserRequest(identifier: value.identifier, title: value.content.title, time: time)
-                }
-            }.receive(on: RunLoop.main, options: nil)
-            .sink {
-                self.viewModel.add(requests: $0)
-                self.listTableView.reloadData()
-            }.store(in: &disposeBag)
-        
-        userNotificationPublicist
             .requestSubject
             .receive(on: DispatchQueue.global(), options: nil)
             .map { results -> [UserRequest] in
@@ -60,9 +40,15 @@ final class ListViewController: UIViewController {
         
         userNotificationPublicist
             .responseSubject
-            .sink {
-                print("ff", $0)
+            .sink { [weak self] _ in
+                self?.userNotificationPublicist.pendingRequests()
             }.store(in: &disposeBag)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        userNotificationPublicist.pendingRequests()
     }
 }
 

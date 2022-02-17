@@ -23,24 +23,16 @@ final class UserNotificationPublicist: NSObject {
     func deleteRequest(identifiers: Array<String>)  {
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
         pendingRequests()
-            .sink { [weak self] response in
-                self?.requestSubject.send(response)
-            }.store(in: &disposeBag)
     }
     
     func deleteAllRequest() {
         userNotificationCenter.removeAllPendingNotificationRequests()
         pendingRequests()
-            .sink { [weak self] response in
-                self?.requestSubject.send(response)
-            }.store(in: &disposeBag)
     }
     
-    func pendingRequests() -> Future<[UNNotificationRequest], Never> {
-        return Future<[UNNotificationRequest], Never> { [weak self] promise in
-            self?.userNotificationCenter.getPendingNotificationRequests { requests in
-                return promise(.success(requests))
-            }
+    func pendingRequests() {
+        userNotificationCenter.getPendingNotificationRequests { [weak self] requests in
+            self?.requestSubject.send(requests)
         }
     }
 
