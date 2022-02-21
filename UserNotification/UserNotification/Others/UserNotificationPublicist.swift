@@ -11,11 +11,13 @@ import UserNotifications
 
 final class UserNotificationPublicist: NSObject {
     private var disposeBag = Set<AnyCancellable>()
+    static let shared = UserNotificationPublicist()
     let userNotificationCenter = UNUserNotificationCenter.current()
+    let listSubject = PassthroughSubject<[UNNotificationRequest], Never>()
     let requestSubject = PassthroughSubject<[UNNotificationRequest], Never>()
     let responseSubject = PassthroughSubject<UNNotificationResponse, Never>()
     
-    override init() {
+    private override init() {
         super.init()
         userNotificationCenter.delegate = self
     }
@@ -32,7 +34,7 @@ final class UserNotificationPublicist: NSObject {
     
     func pendingRequests() {
         userNotificationCenter.getPendingNotificationRequests { [weak self] requests in
-            self?.requestSubject.send(requests)
+            self?.listSubject.send(requests)
         }
     }
 
@@ -56,6 +58,7 @@ final class UserNotificationPublicist: NSObject {
 
 extension UserNotificationPublicist: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        requestSubject.send([notification.request])
         completionHandler([.sound, .badge, .banner, .list])
     }
     

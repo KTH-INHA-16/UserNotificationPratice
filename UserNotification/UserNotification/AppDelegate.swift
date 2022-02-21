@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 import UserNotifications
 
 @main
@@ -33,11 +34,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     //채택후 핸들러 처리를 해주어야 유저 노티를 볼 수 있다.
     //노티를 수신한 이후
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("234")
         completionHandler()
     }
     
     // 노티를 어떤 형식(소리, 배지(앱 아이콘위의 숫자), 배너(구 alert), 리스트)으로 보여줄 것인지 처리가능
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("2345")
+        print(notification.request.content.userInfo)
         completionHandler([.sound, .banner, .list, .badge])
     }
 }

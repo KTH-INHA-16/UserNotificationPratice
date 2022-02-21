@@ -10,7 +10,7 @@ import Combine
 
 final class IntervalViewController: UIViewController {
     private var disposeBag = Set<AnyCancellable>()
-    private let userNotificationPublicist = UserNotificationPublicist()
+    private let userNotificationPublicist = UserNotificationPublicist.shared
     private let userNotificationCenter = UNUserNotificationCenter.current()
     
     @IBOutlet weak var triggerButton: UIButton!
@@ -57,6 +57,9 @@ final class IntervalViewController: UIViewController {
     }
     
     private func addUserNotification(seconds: Int) {
+        let fileName = "sample.aiff"
+        let mp3Name = "fullExample.mp3"
+        
         let content = UNMutableNotificationContent()
         // repeat이 true일 때는 interval이 60이 넘어야 정상 작동함
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(seconds), repeats: false)
@@ -64,10 +67,11 @@ final class IntervalViewController: UIViewController {
         // 아이콘위 숫자
         content.badge = NSNumber(value: UIApplication.shared.applicationIconBadgeNumber + 1)
         // 유저 노티의 소리(커스텀 파일 가능)
-        content.sound = .defaultCritical
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: fileName))
         // 알람의 종류에 따라 분류 가능
         content.threadIdentifier = Identifier.interval.rawValue
         // 알람에 들어가는 기본적인 내용들
+        content.userInfo["audio"] = mp3Name
         content.title = "Time Interval 알람"
         content.subtitle = "\(seconds)초 이전에 동작"
         content.body = "이건 \(seconds)초전에 설정해 놓았던 알람이야!"

@@ -11,7 +11,7 @@ import Combine
 final class ListViewController: UIViewController {
     private var viewModel = ListViewModel()
     private var disposeBag = Set<AnyCancellable>()
-    private let userNotificationPublicist = UserNotificationPublicist()
+    private let userNotificationPublicist = UserNotificationPublicist.shared
     
     @IBOutlet weak var listTableView: UITableView!
     
@@ -19,7 +19,7 @@ final class ListViewController: UIViewController {
         super.viewDidLoad()
         
         userNotificationPublicist
-            .requestSubject
+            .listSubject
             .receive(on: DispatchQueue.global(), options: nil)
             .map { results -> [UserRequest] in
                 return results.map { value -> UserRequest in
@@ -39,7 +39,7 @@ final class ListViewController: UIViewController {
             }.store(in: &disposeBag)
         
         userNotificationPublicist
-            .responseSubject
+            .requestSubject
             .sink { [weak self] _ in
                 self?.userNotificationPublicist.pendingRequests()
             }.store(in: &disposeBag)
