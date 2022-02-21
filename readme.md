@@ -39,6 +39,9 @@ Combine도 간단하게 공부를 해보았지만 어떻게 사용하는지 & �
   - 현재는 구체적인 알람 종류, 트리거, Custom Action과 같은 것들에 대해서 알게됨
 
 ## 공부 기록
+  
+### AVFoundation
+ https://cubic-detail-8ce.notion.site/AVFoundation-Audio-e782c978286f4d6ea1aa645758eee65a
 
 ### User Notification
 
