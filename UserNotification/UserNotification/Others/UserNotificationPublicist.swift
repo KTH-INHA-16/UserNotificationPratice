@@ -14,7 +14,7 @@ final class UserNotificationPublicist: NSObject {
     static let shared = UserNotificationPublicist()
     let userNotificationCenter = UNUserNotificationCenter.current()
     let listSubject = PassthroughSubject<[UNNotificationRequest], Never>()
-    let requestSubject = PassthroughSubject<[UNNotificationRequest], Never>()
+    let requestSubject = PassthroughSubject<UNNotificationRequest, Never>()
     let responseSubject = PassthroughSubject<UNNotificationResponse, Never>()
     
     private override init() {
@@ -58,7 +58,7 @@ final class UserNotificationPublicist: NSObject {
 
 extension UserNotificationPublicist: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        requestSubject.send([notification.request])
+        requestSubject.send(notification.request)
         completionHandler([.sound, .badge, .banner, .list])
     }
     

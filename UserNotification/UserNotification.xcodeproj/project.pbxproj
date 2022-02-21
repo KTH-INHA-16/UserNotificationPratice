@@ -14,6 +14,7 @@
 		0106A4DF27C321B6008788C4 /* sample.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 0106A4DE27C321B6008788C4 /* sample.aiff */; };
 		0106A4E127C32204008788C4 /* sample2.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 0106A4E027C32204008788C4 /* sample2.aiff */; };
 		0106A4E327C32D26008788C4 /* fullExample.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0106A4E227C32D26008788C4 /* fullExample.mp3 */; };
+		0106A4E527C36AA8008788C4 /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0106A4E427C36AA8008788C4 /* alarm.mp3 */; };
 		01D3B65F27BDD57C005D4C78 /* UserNotificationPublicist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3B65E27BDD57C005D4C78 /* UserNotificationPublicist.swift */; };
 		01D3B66127BDF22B005D4C78 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3B66027BDF22B005D4C78 /* ListViewController.swift */; };
 		01D3B66427BDF382005D4C78 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3B66327BDF382005D4C78 /* ListCell.swift */; };
@@ -37,6 +38,7 @@
 		0106A4DE27C321B6008788C4 /* sample.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = sample.aiff; sourceTree = "<group>"; };
 		0106A4E027C32204008788C4 /* sample2.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = sample2.aiff; sourceTree = "<group>"; };
 		0106A4E227C32D26008788C4 /* fullExample.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fullExample.mp3; sourceTree = "<group>"; };
+		0106A4E427C36AA8008788C4 /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
 		01D3B65E27BDD57C005D4C78 /* UserNotificationPublicist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationPublicist.swift; sourceTree = "<group>"; };
 		01D3B66027BDF22B005D4C78 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		01D3B66327BDF382005D4C78 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				0106A4DE27C321B6008788C4 /* sample.aiff */,
 				0106A4E027C32204008788C4 /* sample2.aiff */,
 				0106A4E227C32D26008788C4 /* fullExample.mp3 */,
+				0106A4E427C36AA8008788C4 /* alarm.mp3 */,
 			);
 			path = UserNotification;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				0104CCCC27BCD90100F2D459 /* example.mp3 in Resources */,
 				01DEF46727BC81B1000974D6 /* Main.storyboard in Resources */,
 				0106A4E327C32D26008788C4 /* fullExample.mp3 in Resources */,
+				0106A4E527C36AA8008788C4 /* alarm.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
