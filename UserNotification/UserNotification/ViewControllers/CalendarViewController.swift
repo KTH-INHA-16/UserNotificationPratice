@@ -18,8 +18,6 @@ final class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,12 +38,6 @@ final class CalendarViewController: UIViewController {
     
     @IBAction private func triggerTouchDown(_ sender: UIButton) {
         userNotificationTrigger(date: notificationDatePicker.date)
-    }
-    
-    private func configureUI() {
-        triggerButton.layer.cornerRadius = 6
-        triggerButton.layer.borderWidth = 0.8
-        triggerButton.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     private func userNotificationTrigger(date: Date) {

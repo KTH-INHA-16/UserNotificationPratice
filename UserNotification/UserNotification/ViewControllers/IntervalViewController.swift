@@ -20,8 +20,6 @@ final class IntervalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,12 +48,6 @@ final class IntervalViewController: UIViewController {
         if let text = secondTextField.text, let seconds = Int(text) {
             addUserNotification(seconds: seconds)
         }
-    }
-    
-    private func configureUI() {
-        triggerButton.layer.cornerRadius = 6
-        triggerButton.layer.borderWidth = 0.8
-        triggerButton.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     private func addUserNotification(seconds: Int) {

@@ -19,8 +19,7 @@ final class ActionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureUI()
+
         configureUserNotificationCategories()
         
         userNotificationPublicist
@@ -109,11 +108,5 @@ final class ActionViewController: UIViewController {
         
         // 센터에 추가
         userNotificationCenter.setNotificationCategories([category])
-    }
-    
-    private func configureUI() {
-        triggerButton.layer.cornerRadius = 6
-        triggerButton.layer.borderWidth = 0.8
-        triggerButton.layer.borderColor = UIColor.lightGray.cgColor
     }
 }

@@ -15,6 +15,7 @@
 		0106A4E127C32204008788C4 /* sample2.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 0106A4E027C32204008788C4 /* sample2.aiff */; };
 		0106A4E327C32D26008788C4 /* fullExample.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0106A4E227C32D26008788C4 /* fullExample.mp3 */; };
 		0106A4E527C36AA8008788C4 /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0106A4E427C36AA8008788C4 /* alarm.mp3 */; };
+		015FBA7A27C46E0E00C0624C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015FBA7927C46E0E00C0624C /* UIButton.swift */; };
 		01D3B65F27BDD57C005D4C78 /* UserNotificationPublicist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3B65E27BDD57C005D4C78 /* UserNotificationPublicist.swift */; };
 		01D3B66127BDF22B005D4C78 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3B66027BDF22B005D4C78 /* ListViewController.swift */; };
 		01D3B66427BDF382005D4C78 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3B66327BDF382005D4C78 /* ListCell.swift */; };
@@ -39,6 +40,7 @@
 		0106A4E027C32204008788C4 /* sample2.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = sample2.aiff; sourceTree = "<group>"; };
 		0106A4E227C32D26008788C4 /* fullExample.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fullExample.mp3; sourceTree = "<group>"; };
 		0106A4E427C36AA8008788C4 /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = "<group>"; };
+		015FBA7927C46E0E00C0624C /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		01D3B65E27BDD57C005D4C78 /* UserNotificationPublicist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationPublicist.swift; sourceTree = "<group>"; };
 		01D3B66027BDF22B005D4C78 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		01D3B66327BDF382005D4C78 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 			path = Others;
 			sourceTree = "<group>";
 		};
+		015FBA7827C46E0300C0624C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				015FBA7927C46E0E00C0624C /* UIButton.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		01D3B66227BDF36C005D4C78 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +150,7 @@
 		01DEF45E27BC81B1000974D6 /* UserNotification */ = {
 			isa = PBXGroup;
 			children = (
+				015FBA7827C46E0300C0624C /* Extensions */,
 				0104CCCF27BCDD8900F2D459 /* Others */,
 				01D3B66827BE1455005D4C78 /* ViewModels */,
 				01D3B66727BE1133005D4C78 /* Models */,
@@ -249,6 +260,7 @@
 				01D3B66627BE112C005D4C78 /* UserRequest.swift in Sources */,
 				01D3B65F27BDD57C005D4C78 /* UserNotificationPublicist.swift in Sources */,
 				01D3B66A27BE1461005D4C78 /* ListViewModel.swift in Sources */,
+				015FBA7A27C46E0E00C0624C /* UIButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
