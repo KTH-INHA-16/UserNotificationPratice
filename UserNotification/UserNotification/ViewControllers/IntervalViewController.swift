@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 import Combine
 
 final class IntervalViewController: UIViewController {
@@ -63,6 +64,16 @@ final class IntervalViewController: UIViewController {
         view.endEditing(true)
     }
     
+    @IBAction func stopTouchDown(_ sender: UIButton) {
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+            return
+        }
+        sceneDelegate.audioPlayers.forEach {
+            $0.stop()
+        }
+        sceneDelegate.audioPlayers.removeAll()
+    }
+    
     @IBAction private func triggerTouchDown(_ sender: UIButton) {
         if let text = secondTextField.text, let seconds = Int(text) {
             addUserNotification(seconds: seconds)
@@ -87,6 +98,15 @@ final class IntervalViewController: UIViewController {
             content.threadIdentifier = Identifier.interval.rawValue
             // 알람에 들어가는 기본적인 내용들
             content.title = "단계별 알람"
+            
+            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+                return
+            }
+            
+            sceneDelegate.audioPlayers.forEach {
+                print($0.deviceCurrentTime)
+                print($0.currentTime)
+            }
             
             do {
                 guard let path = Bundle.main.url(forResource: "alarm", withExtension: "mp3") else {
