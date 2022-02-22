@@ -10,14 +10,15 @@ import Combine
 import UserNotifications
 
 final class UserNotificationPublicist: NSObject {
-    private var disposeBag = Set<AnyCancellable>()
-    static let shared = UserNotificationPublicist()
     let userNotificationCenter = UNUserNotificationCenter.current()
-    let listSubject = PassthroughSubject<[UNNotificationRequest], Never>()
-    let requestSubject = PassthroughSubject<UNNotificationRequest, Never>()
-    let responseSubject = PassthroughSubject<UNNotificationResponse, Never>()
+    let listSubject : PassthroughSubject<[UNNotificationRequest], Never>
+    let requestSubject : PassthroughSubject<UNNotificationRequest, Never>
+    let responseSubject : PassthroughSubject<UNNotificationResponse, Never>
     
-    private override init() {
+    override init() {
+        listSubject = PassthroughSubject<[UNNotificationRequest], Never>()
+        requestSubject = PassthroughSubject<UNNotificationRequest, Never>()
+        responseSubject = PassthroughSubject<UNNotificationResponse, Never>()
         super.init()
         userNotificationCenter.delegate = self
     }

@@ -77,7 +77,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919" y="-647"/>
+            <point key="canvasLocation" x="1116" y="-674"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="tsE-2d-xhg">
@@ -316,7 +316,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ajc-gE-lJv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1115.9420289855072" y="828.34821428571422"/>
+            <point key="canvasLocation" x="1151" y="828"/>
         </scene>
     </scenes>
     <resources>

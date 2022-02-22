@@ -10,7 +10,7 @@ import Combine
 
 final class CalendarViewController: UIViewController {
     private var disposeBag = Set<AnyCancellable>()
-    private let userNotificationPublicist = UserNotificationPublicist.shared
+    private let userNotificationPublicist = UserNotificationPublicist()
     private let userNotificationCenter = UNUserNotificationCenter.current()
     
     @IBOutlet weak var triggerButton: UIButton!
