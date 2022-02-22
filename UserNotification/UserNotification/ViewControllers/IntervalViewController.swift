@@ -10,16 +10,25 @@ import AVFoundation
 import Combine
 
 final class IntervalViewController: UIViewController {
+    private var timerSubscription: AnyCancellable?
     private var disposeBag = Set<AnyCancellable>()
     private var player: AVAudioPlayer?
     private let userNotificationPublicist = UserNotificationPublicist()
     private let userNotificationCenter = UNUserNotificationCenter.current()
     
     @IBOutlet weak var triggerButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var secondTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userNotificationPublicist
+            .listSubject
+            .receive(on: DispatchQueue.main, options: nil)
+            .sink { [weak self] requests in
+                self?.stopButton.isHidden = requests.isEmpty
+            }.store(in: &disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +45,16 @@ final class IntervalViewController: UIViewController {
                     break
                 }
             }.store(in: &disposeBag)
+        
+        timerSubscription = Timer.publish(every: 1, tolerance: nil, on: RunLoop.main, in: .default, options: nil)
+            .autoconnect()
+            .sink { [weak self] val in
+                self?.userNotificationPublicist.pendingRequests()
+            }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        timerSubscription?.cancel()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
