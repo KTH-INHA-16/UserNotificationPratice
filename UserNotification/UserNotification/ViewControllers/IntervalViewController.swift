@@ -13,6 +13,7 @@ import Combine
 final class IntervalViewController: UIViewController {
     private var timerSubscription: AnyCancellable?
     private var disposeBag = Set<AnyCancellable>()
+    private var dates: Set<String> = []
     private var player: AVAudioPlayer?
     private let userNotificationPublicist = UserNotificationPublicist()
     private let userNotificationCenter = UNUserNotificationCenter.current()
@@ -29,6 +30,37 @@ final class IntervalViewController: UIViewController {
             .receive(on: DispatchQueue.main, options: nil)
             .sink { [weak self] requests in
                 self?.stopButton.isHidden = requests.isEmpty
+            }.store(in: &disposeBag)
+        
+        // 노래를 안겹치게 만들기 위한 로직
+        // Timer 사용
+        Timer.publish(every: 0.5, tolerance: nil, on: RunLoop.main, in: .default, options: nil)
+            .autoconnect()
+            .sink { _ in
+                guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+                    return
+                }
+                
+                var index: Int = 0
+                
+                for i in stride(from: sceneDelegate.audioPlayers.count-1, to: 0, by: -1) {
+                    if sceneDelegate.audioPlayers[i].audioPlayer.currentTime != 0 {
+                        index = i
+                        break
+                    }
+                }
+                for i in 0..<index {
+                    if 0 == index {
+                        break
+                    }
+                    sceneDelegate.audioPlayers[i].audioPlayer.stop()
+                }
+                for _ in 0..<index {
+                    if 0 == index {
+                        break
+                    }
+                    sceneDelegate.audioPlayers.removeFirst()
+                }
             }.store(in: &disposeBag)
     }
     
@@ -69,9 +101,14 @@ final class IntervalViewController: UIViewController {
             return
         }
         sceneDelegate.audioPlayers.forEach {
-            $0.stop()
+            if $0.startDate <= Date() {
+                $0.audioPlayer.stop()
+                self.dates.insert($0.startDate.description)
+                sceneDelegate.audioPlayers.removeFirst()
+            }
         }
-        sceneDelegate.audioPlayers.removeAll()
+        userNotificationCenter.removePendingNotificationRequests(withIdentifiers: Array(dates))
+        dates.removeAll()
     }
     
     @IBAction private func triggerTouchDown(_ sender: UIButton) {
@@ -84,6 +121,8 @@ final class IntervalViewController: UIViewController {
         guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
             return
         }
+        
+        let date = Date()
         
         for i in 0..<4 {
             let content = UNMutableNotificationContent()
@@ -98,15 +137,6 @@ final class IntervalViewController: UIViewController {
             content.threadIdentifier = Identifier.interval.rawValue
             // 알람에 들어가는 기본적인 내용들
             content.title = "단계별 알람"
-            
-            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
-                return
-            }
-            
-            sceneDelegate.audioPlayers.forEach {
-                print($0.deviceCurrentTime)
-                print($0.currentTime)
-            }
             
             do {
                 guard let path = Bundle.main.url(forResource: "alarm", withExtension: "mp3") else {
@@ -135,13 +165,13 @@ final class IntervalViewController: UIViewController {
                 player?.delegate = self
                 player?.prepareToPlay()
                 player?.play(atTime: offset)
-                sceneDelegate.audioPlayers.append(player!)
+                sceneDelegate.audioPlayers.append(.init(audioPlayer: player!, startDate: date))
                 
             } catch let error {
                 print(error.localizedDescription)
             }
             
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: date.description, content: content, trigger: trigger)
             
             userNotificationCenter.add(request) {
                 guard let error = $0 else {

@@ -29,6 +29,7 @@
 		01DEF46C27BC81B2000974D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01DEF46A27BC81B2000974D6 /* LaunchScreen.storyboard */; };
 		01DEF47427BC8D0A000974D6 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DEF47327BC8D0A000974D6 /* Identifier.swift */; };
 		01DEF47827BC9380000974D6 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DEF47727BC9380000974D6 /* CalendarViewController.swift */; };
+		3BBE9E5C27C50A180091D139 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBE9E5B27C50A180091D139 /* AudioPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		01DEF46D27BC81B2000974D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01DEF47327BC8D0A000974D6 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 		01DEF47727BC9380000974D6 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		3BBE9E5B27C50A180091D139 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				01D3B66527BE112C005D4C78 /* UserRequest.swift */,
+				3BBE9E5B27C50A180091D139 /* AudioPlayer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				01D3B66627BE112C005D4C78 /* UserRequest.swift in Sources */,
 				01D3B65F27BDD57C005D4C78 /* UserNotificationPublicist.swift in Sources */,
 				01D3B66A27BE1461005D4C78 /* ListViewModel.swift in Sources */,
+				3BBE9E5C27C50A180091D139 /* AudioPlayer.swift in Sources */,
 				015FBA7A27C46E0E00C0624C /* UIButton+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
