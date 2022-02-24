@@ -17,9 +17,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9h-3E-5tU">
-                                <rect key="frame" x="183" y="413" width="48.5" height="31"/>
+                                <rect key="frame" x="127" y="413" width="60.5" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="알람"/>
+                                <buttonConfiguration key="configuration" style="plain" title="스마트"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="0.80000000000000004"/>
@@ -56,14 +56,44 @@
                                     <attributedString key="attributedTitle">
                                         <fragment content="소리 종료 &amp; 현재 알람들 취소">
                                             <attributes>
-                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <font key="NSFont" size="10" name="AppleSDGothicNeo-Regular"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
                                 </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="cancelTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="wOm-Ub-ijL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dS-bU-LA9">
+                                <rect key="frame" x="227" y="413" width="60.5" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="일반"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.80000000000000004"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="normalTriggerTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="Rv4-Pt-D07"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -72,12 +102,15 @@
                         <constraints>
                             <constraint firstItem="no0-Et-vwx" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="5CL-Zz-OGT"/>
                             <constraint firstItem="u9h-3E-5tU" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="6oW-rT-n0X"/>
-                            <constraint firstItem="u9h-3E-5tU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="77p-4R-1xg"/>
+                            <constraint firstItem="u9h-3E-5tU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" constant="-50" id="77p-4R-1xg"/>
+                            <constraint firstItem="4dS-bU-LA9" firstAttribute="centerX" secondItem="no0-Et-vwx" secondAttribute="centerX" constant="50" id="Af6-po-3bI"/>
+                            <constraint firstItem="4dS-bU-LA9" firstAttribute="top" secondItem="no0-Et-vwx" secondAttribute="bottom" constant="24" id="BR8-CK-i5y"/>
                             <constraint firstItem="VKJ-OA-0Gq" firstAttribute="leading" secondItem="no0-Et-vwx" secondAttribute="trailing" constant="16" id="DjV-NA-zPk"/>
                             <constraint firstItem="iTg-yr-jzu" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="VrM-r8-zmR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="VKJ-OA-0Gq" secondAttribute="trailing" constant="115" id="X8e-W4-xwl"/>
                             <constraint firstItem="VKJ-OA-0Gq" firstAttribute="centerY" secondItem="no0-Et-vwx" secondAttribute="centerY" id="ZbH-fg-bad"/>
                             <constraint firstItem="iTg-yr-jzu" firstAttribute="top" secondItem="u9h-3E-5tU" secondAttribute="bottom" constant="18" id="bIO-T8-wQK"/>
+                            <constraint firstItem="4dS-bU-LA9" firstAttribute="width" secondItem="u9h-3E-5tU" secondAttribute="width" id="hqC-rS-iua"/>
                             <constraint firstItem="u9h-3E-5tU" firstAttribute="top" secondItem="no0-Et-vwx" secondAttribute="bottom" constant="24" id="rin-9A-f64"/>
                         </constraints>
                     </view>

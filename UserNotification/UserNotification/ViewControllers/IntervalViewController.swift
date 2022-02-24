@@ -24,6 +24,8 @@ final class IntervalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userNotificationCenter.removeAllPendingNotificationRequests()
+        
         // 노래를 안겹치게 만들기 위한 로직
         // Timer 사용
         Timer.publish(every: 0.5, tolerance: nil, on: RunLoop.current, in: .default, options: nil)
@@ -100,13 +102,49 @@ final class IntervalViewController: UIViewController {
         identifiers.forEach { identifier in
             sceneDelegate.audioPlayers.removeAll { $0.identifier == identifier }
         }
-        print(sceneDelegate.audioPlayers, players)
+        
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
+    
+    @IBAction func normalTriggerTouchDown(_ sender: UIButton) {
+        if let text = secondTextField.text, let seconds = Int(text) {
+            addNormalNotification(seconds: seconds)
+        }
     }
     
     @IBAction private func triggerTouchDown(_ sender: UIButton) {
         if let text = secondTextField.text, let seconds = Int(text) {
             addUserNotification(seconds: seconds)
+        }
+    }
+    
+    private func addNormalNotification(seconds: Int) {
+        let musicName = "sample2.aiff"
+        let date = Date()
+        let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date.addingTimeInterval(Double(seconds)))
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
+        let content = UNMutableNotificationContent()
+        
+        
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: musicName))
+        content.title = "\(date.description) 알람"
+        var requests: [UNNotificationRequest] = [UNNotificationRequest(identifier: date.description, content: content, trigger: trigger)]
+        
+        for i in 1...20 {
+            let content = UNMutableNotificationContent()
+            
+            
+            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: musicName))
+            content.threadIdentifier = date.description
+            content.title = "\(date.description) 알람"
+            let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date.addingTimeInterval(Double(seconds+i*20)))
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
+            let request = UNNotificationRequest(identifier: date.description+"\(i+1)", content: content, trigger: trigger)
+            requests.append(request)
+        }
+        
+        requests.forEach { [weak self] request in
+            self?.userNotificationCenter.add(request)
         }
     }
     
