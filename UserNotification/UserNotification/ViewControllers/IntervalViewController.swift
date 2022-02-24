@@ -34,32 +34,28 @@ final class IntervalViewController: UIViewController {
         
         // 노래를 안겹치게 만들기 위한 로직
         // Timer 사용
-        Timer.publish(every: 0.5, tolerance: nil, on: RunLoop.main, in: .default, options: nil)
+        Timer.publish(every: 0.5, tolerance: nil, on: RunLoop.current, in: .default, options: nil)
             .autoconnect()
             .sink { _ in
                 guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
                     return
                 }
                 
-                var index: Int = 0
+                var tmp: [Int] = []
                 
-                for i in stride(from: sceneDelegate.audioPlayers.count-1, to: 0, by: -1) {
-                    if sceneDelegate.audioPlayers[i].audioPlayer.currentTime != 0 {
-                        index = i
-                        break
+                for i in 0..<sceneDelegate.audioPlayers.count {
+                    let audioPlayer = sceneDelegate.audioPlayers[i].audioPlayer
+                    if audioPlayer.currentTime != 0 || !audioPlayer.isPlaying {
+                        tmp.append(i)
                     }
                 }
-                for i in 0..<index {
-                    if 0 == index {
-                        break
-                    }
-                    sceneDelegate.audioPlayers[i].audioPlayer.stop()
+
+                if !tmp.isEmpty {
+                    tmp.removeLast()
                 }
-                for _ in 0..<index {
-                    if 0 == index {
-                        break
-                    }
-                    sceneDelegate.audioPlayers.removeFirst()
+                
+                for i in tmp.reversed() {
+                    sceneDelegate.audioPlayers.remove(at: i)
                 }
             }.store(in: &disposeBag)
     }
@@ -149,6 +145,7 @@ final class IntervalViewController: UIViewController {
                 let offset: Double
                 trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(seconds + i * 15), repeats: false)
                 offset = player!.deviceCurrentTime + Double(seconds) + Double(i * 15)
+                let playerDate = date.addingTimeInterval(Double(i)*15)
                 
                 if i == 3 {
                     content.subtitle = "최종 단계 알람"
@@ -165,7 +162,7 @@ final class IntervalViewController: UIViewController {
                 player?.delegate = self
                 player?.prepareToPlay()
                 player?.play(atTime: offset)
-                sceneDelegate.audioPlayers.append(.init(audioPlayer: player!, startDate: date))
+                sceneDelegate.audioPlayers.append(.init(audioPlayer: player!, startDate: playerDate))
                 
             } catch let error {
                 print(error.localizedDescription)
@@ -180,6 +177,9 @@ final class IntervalViewController: UIViewController {
                 
                 NSLog(error.localizedDescription)
             }
+        }
+        sceneDelegate.audioPlayers.sort {
+            return $0.startDate < $1.startDate
         }
     }
 }
