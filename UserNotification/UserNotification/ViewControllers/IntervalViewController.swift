@@ -49,6 +49,8 @@ final class IntervalViewController: UIViewController {
                 for i in tmp.reversed() {
                     sceneDelegate.audioPlayers.remove(at: i)
                 }
+                
+                sceneDelegate.audioPlayers.removeAll { !$0.audioPlayer.isPlaying }
             }.store(in: &disposeBag)
     }
     
@@ -82,6 +84,24 @@ final class IntervalViewController: UIViewController {
         super.touchesBegan(touches, with: event)
         
         view.endEditing(true)
+    }
+    
+    @IBAction func cancelTouchDown(_ sender: UIButton) {
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+            return
+        }
+        
+        let players = sceneDelegate.audioPlayers.filter { $0.audioPlayer.isPlaying && $0.startDate <= Date() }
+        for player in players {
+            let scenePlayers = sceneDelegate.audioPlayers.filter { $0.identifier == player.identifier }
+            scenePlayers.forEach { $0.audioPlayer.stop() }
+        }
+        let identifiers: [String] = players.map { $0.identifier }
+        identifiers.forEach { identifier in
+            sceneDelegate.audioPlayers.removeAll { $0.identifier == identifier }
+        }
+        print(sceneDelegate.audioPlayers, players)
+        userNotificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
     }
     
     @IBAction private func triggerTouchDown(_ sender: UIButton) {
@@ -139,7 +159,7 @@ final class IntervalViewController: UIViewController {
                 player?.delegate = self
                 player?.prepareToPlay()
                 player?.play(atTime: offset)
-                sceneDelegate.audioPlayers.append(.init(audioPlayer: player!, startDate: playerDate))
+                sceneDelegate.audioPlayers.append(.init(audioPlayer: player!, identifier: date.description, startDate: playerDate))
                 
             } catch let error {
                 print(error.localizedDescription)

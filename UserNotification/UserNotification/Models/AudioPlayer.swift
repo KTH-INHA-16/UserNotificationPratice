@@ -10,5 +10,6 @@ import AVFoundation
 
 struct AudioPlayer {
     let audioPlayer: AVAudioPlayer
+    let identifier: String
     let startDate: Date
 }
