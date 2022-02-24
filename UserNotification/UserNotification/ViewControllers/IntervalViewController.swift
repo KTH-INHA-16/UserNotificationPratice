@@ -24,8 +24,6 @@ final class IntervalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userNotificationCenter.removeAllPendingNotificationRequests()
-        
         // 노래를 안겹치게 만들기 위한 로직
         // Timer 사용
         Timer.publish(every: 0.5, tolerance: nil, on: RunLoop.current, in: .default, options: nil)
@@ -104,6 +102,13 @@ final class IntervalViewController: UIViewController {
         }
         
         userNotificationCenter.removePendingNotificationRequests(withIdentifiers: identifiers)
+        
+        userNotificationCenter.getPendingNotificationRequests { [weak self] requests in
+            var identifiers: Set<String> = []
+            requests.filter { $0.content.threadIdentifier <= Date().description }.forEach { identifiers.insert($0.identifier) }
+            self?.userNotificationCenter.removePendingNotificationRequests(withIdentifiers: Array(identifiers))
+            
+        }
     }
     
     @IBAction func normalTriggerTouchDown(_ sender: UIButton) {
@@ -121,16 +126,9 @@ final class IntervalViewController: UIViewController {
     private func addNormalNotification(seconds: Int) {
         let musicName = "sample2.aiff"
         let date = Date()
-        let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date.addingTimeInterval(Double(seconds)))
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
-        let content = UNMutableNotificationContent()
+        var requests: [UNNotificationRequest] = []
         
-        
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: musicName))
-        content.title = "\(date.description) 알람"
-        var requests: [UNNotificationRequest] = [UNNotificationRequest(identifier: date.description, content: content, trigger: trigger)]
-        
-        for i in 1...20 {
+        for i in 0...20 {
             let content = UNMutableNotificationContent()
             
             
