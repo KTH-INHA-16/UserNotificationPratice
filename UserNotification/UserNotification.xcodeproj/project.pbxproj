@@ -88,6 +88,10 @@
 				0104CCC327BCD3CF00F2D459 /* example.jpg */,
 				0104CCC427BCD3CF00F2D459 /* example.mp4 */,
 				0104CCCB27BCD90000F2D459 /* example.mp3 */,
+				0106A4DE27C321B6008788C4 /* sample.aiff */,
+				0106A4E027C32204008788C4 /* sample2.aiff */,
+				0106A4E227C32D26008788C4 /* fullExample.mp3 */,
+				0106A4E427C36AA8008788C4 /* alarm.mp3 */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -166,10 +170,6 @@
 				01DEF46827BC81B2000974D6 /* Assets.xcassets */,
 				01DEF46A27BC81B2000974D6 /* LaunchScreen.storyboard */,
 				01DEF46D27BC81B2000974D6 /* Info.plist */,
-				0106A4DE27C321B6008788C4 /* sample.aiff */,
-				0106A4E027C32204008788C4 /* sample2.aiff */,
-				0106A4E227C32D26008788C4 /* fullExample.mp3 */,
-				0106A4E427C36AA8008788C4 /* alarm.mp3 */,
 			);
 			path = UserNotification;
 			sourceTree = "<group>";
