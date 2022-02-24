@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Interval-->
+        <!--Interval View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="IntervalViewController" customModule="UserNotification" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9h-3E-5tU">
-                                <rect key="frame" x="183" y="413" width="48.5" height="31"/>
+                                <rect key="frame" x="183" y="435" width="48.5" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="알람"/>
                                 <userDefinedRuntimeAttributes>
@@ -36,7 +36,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="no0-Et-vwx">
-                                <rect key="frame" x="157" y="355" width="100" height="34"/>
+                                <rect key="frame" x="157" y="377" width="100" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="1dO-Ir-yfg"/>
                                 </constraints>
@@ -44,30 +44,11 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="초후" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKJ-OA-0Gq">
-                                <rect key="frame" x="273" y="363" width="26" height="18"/>
+                                <rect key="frame" x="273" y="385" width="26" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" systemColor="systemBlueColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQP-6w-sl2">
-                                <rect key="frame" x="168.5" y="459" width="77" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="알람 중지"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.80000000000000004"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="stopTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="4rZ-sC-elP"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -76,23 +57,20 @@
                             <constraint firstItem="u9h-3E-5tU" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="6oW-rT-n0X"/>
                             <constraint firstItem="u9h-3E-5tU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="77p-4R-1xg"/>
                             <constraint firstItem="VKJ-OA-0Gq" firstAttribute="leading" secondItem="no0-Et-vwx" secondAttribute="trailing" constant="16" id="DjV-NA-zPk"/>
-                            <constraint firstItem="QQP-6w-sl2" firstAttribute="top" secondItem="u9h-3E-5tU" secondAttribute="bottom" constant="15" id="T59-Zz-D8g"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="VKJ-OA-0Gq" secondAttribute="trailing" constant="115" id="X8e-W4-xwl"/>
                             <constraint firstItem="VKJ-OA-0Gq" firstAttribute="centerY" secondItem="no0-Et-vwx" secondAttribute="centerY" id="ZbH-fg-bad"/>
                             <constraint firstItem="u9h-3E-5tU" firstAttribute="top" secondItem="no0-Et-vwx" secondAttribute="bottom" constant="24" id="rin-9A-f64"/>
-                            <constraint firstItem="QQP-6w-sl2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="vZu-aG-smK"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Interval" image="clock" catalog="system" id="Q2l-eb-e5g"/>
+                    <navigationItem key="navigationItem" id="hHU-Fe-9Eg"/>
                     <connections>
                         <outlet property="secondTextField" destination="no0-Et-vwx" id="YAw-cQ-ZoH"/>
-                        <outlet property="stopButton" destination="QQP-6w-sl2" id="CYG-qy-SJh"/>
                         <outlet property="triggerButton" destination="u9h-3E-5tU" id="DB6-lm-xEV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1116" y="-674"/>
+            <point key="canvasLocation" x="2026.0869565217392" y="-674.33035714285711"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="tsE-2d-xhg">
@@ -305,7 +283,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Xj7-NP-1jL"/>
+                        <segue destination="bBt-uH-ICr" kind="relationship" relationship="viewControllers" id="Xj7-NP-1jL"/>
                         <segue destination="wLH-5F-9uX" kind="relationship" relationship="viewControllers" id="v5E-dz-Yfs"/>
                         <segue destination="s8U-zD-HDX" kind="relationship" relationship="viewControllers" id="7Ot-bF-Tek"/>
                     </connections>
@@ -332,6 +310,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ajc-gE-lJv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1151" y="828"/>
+        </scene>
+        <!--Interval-->
+        <scene sceneID="VNu-bz-u9A">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bBt-uH-ICr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Interval" image="clock" catalog="system" id="Q2l-eb-e5g"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z0U-N0-77w">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="eSI-br-AQN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TV3-8L-zRo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1115.9420289855072" y="-674.33035714285711"/>
         </scene>
     </scenes>
     <resources>

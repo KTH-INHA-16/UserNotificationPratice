@@ -19,18 +19,10 @@ final class IntervalViewController: UIViewController {
     private let userNotificationCenter = UNUserNotificationCenter.current()
     
     @IBOutlet weak var triggerButton: UIButton!
-    @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var secondTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        userNotificationPublicist
-            .listSubject
-            .receive(on: DispatchQueue.main, options: nil)
-            .sink { [weak self] requests in
-                self?.stopButton.isHidden = requests.isEmpty
-            }.store(in: &disposeBag)
         
         // 노래를 안겹치게 만들기 위한 로직
         // Timer 사용
@@ -90,21 +82,6 @@ final class IntervalViewController: UIViewController {
         super.touchesBegan(touches, with: event)
         
         view.endEditing(true)
-    }
-    
-    @IBAction func stopTouchDown(_ sender: UIButton) {
-        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
-            return
-        }
-        sceneDelegate.audioPlayers.forEach {
-            if $0.startDate <= Date() {
-                $0.audioPlayer.stop()
-                self.dates.insert($0.startDate.description)
-                sceneDelegate.audioPlayers.removeFirst()
-            }
-        }
-        userNotificationCenter.removePendingNotificationRequests(withIdentifiers: Array(dates))
-        dates.removeAll()
     }
     
     @IBAction private func triggerTouchDown(_ sender: UIButton) {
