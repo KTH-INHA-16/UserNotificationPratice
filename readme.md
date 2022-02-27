@@ -4,10 +4,10 @@
 
 ## 구현(연습)된 유저 노티피케이션
 
-1. TimeInterval(Trigger)
-  1.1 AVFoundation의 AVAudioPlayer를 이용한 알람(Foreground & background)
-  1.2 일반 알람(User Notification)을 이용한 알람
-  1.3 취소 기능(현재 기준으로 작동하는 알람들에 대한 취소)
+1. TimeInterval(Trigger)<br>
+  1.1 AVFoundation의 AVAudioPlayer를 이용한 알람(Foreground & background)<br>
+  1.2 일반 알람(User Notification)을 이용한 알람<br>
+  1.3 취소 기능(현재 기준으로 작동하는 알람들에 대한 취소)<br>
 3. Calendar(Trigger)
 4. Actions(Category)
 
