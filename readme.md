@@ -5,8 +5,11 @@
 ## 구현(연습)된 유저 노티피케이션
 
 1. TimeInterval(Trigger)
-2. Calendar(Trigger)
-3. Actions(Category)
+  1.1 AVFoundation의 AVAudioPlayer를 이용한 알람(Foreground & background)
+  1.2 일반 알람(User Notification)을 이용한 알람
+  1.3 취소 기능(현재 기준으로 작동하는 알람들에 대한 취소)
+3. Calendar(Trigger)
+4. Actions(Category)
 
 위의 순으로 구현되있습니다.
 
@@ -37,6 +40,8 @@ Combine도 간단하게 공부를 해보았지만 어떻게 사용하는지 & �
   - Combine은 직접 Set<AnyCancellable>을 만들어서 처리를 해주어야 하는 번거로움(?) 있음
 3. UserNotification을 많이 사용해보지 않았고, 직전 프로젝트나 다른 프로젝트에서도 사용해보았는데 어떤 구체적인 것이 있는지 알지 못했었음
   - 현재는 구체적인 알람 종류, 트리거, Custom Action과 같은 것들에 대해서 알게됨
+4. 알람에 대해서 새롭게 생각하게 됨
+  - 애플의 알람 정책(애플은 기본 알람과 똑같은 앱을 복제해서 만들지 못하도록 함)을 알게 되었고, 여러가지 경우(ex: 소리가 계속 나오게 하고 싶은 알람은 어떻게 만들까?)에 대해서 생각하게 됨
 
 ## 공부 기록
   
