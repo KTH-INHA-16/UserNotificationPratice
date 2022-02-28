@@ -7,15 +7,16 @@
 
 import UIKit
 import AVFoundation
-import MediaPlayer
 import Combine
+import CoreHaptics
 
 final class IntervalViewController: UIViewController {
     private var timerSubscription: AnyCancellable?
     private var disposeBag = Set<AnyCancellable>()
     private var dates: Set<String> = []
+    private var engine: CHHapticEngine?
     private var player: AVAudioPlayer?
-    private let userNotificationPublicist = UserNotificationPublicist()
+    private let userNotificationPublicist = UserNotificationPublicist.shared
     private let userNotificationCenter = UNUserNotificationCenter.current()
     
     @IBOutlet weak var triggerButton: UIButton!
@@ -24,6 +25,29 @@ final class IntervalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userNotificationPublicist
+            .requestSubject
+            .sink { _ in
+                var events = [CHHapticEvent]()
+                let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1.0)
+                var relativeTimer = 0.0
+                
+                for _ in 0...5 {
+                    let event1 = CHHapticEvent(eventType: .hapticContinuous, parameters: [intensity], relativeTime: relativeTimer, duration: 0.5)
+                    relativeTimer += event1.duration + 0.5
+                    events.append(event1)
+                }
+                do {
+                    self.engine = try CHHapticEngine()
+                    let pattern = try CHHapticPattern(events: events, parameters: [])
+                    let player = try self.engine?.makePlayer(with: pattern)
+
+                    try self.engine?.start()
+                    try player?.start(atTime: 0)
+                } catch {
+                    print("Haptic Error: \(error.localizedDescription).")
+                }
+            }.store(in: &disposeBag)
         // 노래를 안겹치게 만들기 위한 로직
         // Timer 사용
         Timer.publish(every: 0.5, tolerance: nil, on: RunLoop.current, in: .default, options: nil)
@@ -180,6 +204,7 @@ final class IntervalViewController: UIViewController {
                 offset = player!.deviceCurrentTime + Double(seconds) + Double(i * 15)
                 let playerDate = date.addingTimeInterval(Double(i)*15)
                 
+                content.threadIdentifier = date.description
                 if i == 3 {
                     content.subtitle = "최종 단계 알람"
                     content.body = "이건 최종단계 알람이야!"
@@ -201,7 +226,7 @@ final class IntervalViewController: UIViewController {
                 print(error.localizedDescription)
             }
             
-            let request = UNNotificationRequest(identifier: date.description, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             
             userNotificationCenter.add(request) {
                 guard let error = $0 else {

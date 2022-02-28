@@ -11,7 +11,7 @@ import Combine
 
 final class ActionViewController: UIViewController {
     private var disposeBag = Set<AnyCancellable>()
-    private let userNotificationPublicist = UserNotificationPublicist()
+    private let userNotificationPublicist = UserNotificationPublicist.shared
     private let userNotificationCenter = UNUserNotificationCenter.current()
     
     @IBOutlet weak var triggerButton: UIButton!
