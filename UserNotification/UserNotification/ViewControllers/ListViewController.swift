@@ -78,6 +78,18 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             userNotificationPublicist.deleteRequest(identifiers: [viewModel.requests[indexPath.row].identifier])
+            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+                return
+            }
+            
+            sceneDelegate.audioPlayers
+                .filter { $0.startDate.description == viewModel.requests[indexPath.row].identifier }
+                .enumerated()
+                .reversed()
+                .forEach {
+                    $0.element.audioPlayer.stop()
+                    sceneDelegate.audioPlayers.remove(at: $0.offset)
+                }
         }
     }
 }
