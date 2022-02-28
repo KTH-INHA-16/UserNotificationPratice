@@ -11,7 +11,7 @@ import Combine
 final class ListViewController: UIViewController {
     private var viewModel = ListViewModel()
     private var disposeBag = Set<AnyCancellable>()
-    private let userNotificationPublicist = UserNotificationPublicist()
+    private let userNotificationPublicist = UserNotificationPublicist.shared
     
     @IBOutlet weak var listTableView: UITableView!
     
