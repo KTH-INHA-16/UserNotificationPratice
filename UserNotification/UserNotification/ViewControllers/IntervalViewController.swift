@@ -217,30 +217,26 @@ final class IntervalViewController: UIViewController {
                     player?.volume = 0.15 * Float(i+1)
                 }
                 
-                player?.delegate = self
                 player?.prepareToPlay()
                 player?.play(atTime: offset)
                 sceneDelegate.audioPlayers.append(.init(audioPlayer: player!, identifier: date.description, startDate: playerDate))
                 
-            } catch let error {
-                print(error.localizedDescription)
-            }
-            
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-            
-            userNotificationCenter.add(request) {
-                guard let error = $0 else {
-                    return
+                let request = UNNotificationRequest(identifier: playerDate.description, content: content, trigger: trigger)
+                
+                userNotificationCenter.add(request) {
+                    guard let error = $0 else {
+                        return
+                    }
+                    
+                    NSLog(error.localizedDescription)
                 }
                 
-                NSLog(error.localizedDescription)
+            } catch let error {
+                print(error.localizedDescription)
             }
         }
         sceneDelegate.audioPlayers.sort {
             return $0.startDate < $1.startDate
         }
     }
-}
-
-extension IntervalViewController: AVAudioPlayerDelegate {
 }
