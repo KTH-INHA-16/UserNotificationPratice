@@ -46,7 +46,7 @@ Combine도 간단하게 공부를 해보았지만 어떻게 사용하는지 & �
 
 ## 공부 기록
   
-### AVFoundation
+### AVFoundation(Audio)
  https://cubic-detail-8ce.notion.site/AVFoundation-Audio-e782c978286f4d6ea1aa645758eee65a
 
 ### User Notification
