@@ -23,11 +23,6 @@ final class IntervalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userNotificationPublicist
-            .requestSubject
-            .sink { _ in
-                // TO-DO(Recive on foreground)
-            }.store(in: &disposeBag)
         // 노래를 안겹치게 만들기 위한 로직
         // Timer 사용
         Timer.publish(every: 0.5, tolerance: nil, on: RunLoop.current, in: .default, options: nil)
