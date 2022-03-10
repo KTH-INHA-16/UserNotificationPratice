@@ -8,13 +8,11 @@
 import UIKit
 import AVFoundation
 import Combine
-import CoreHaptics
 
 final class IntervalViewController: UIViewController {
     private var timerSubscription: AnyCancellable?
     private var disposeBag = Set<AnyCancellable>()
     private var dates: Set<String> = []
-    private var engine: CHHapticEngine?
     private var player: AVAudioPlayer?
     private let userNotificationPublicist = UserNotificationPublicist.shared
     private let userNotificationCenter = UNUserNotificationCenter.current()
@@ -28,25 +26,7 @@ final class IntervalViewController: UIViewController {
         userNotificationPublicist
             .requestSubject
             .sink { _ in
-                var events = [CHHapticEvent]()
-                let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1.0)
-                var relativeTimer = 0.0
-                
-                for _ in 0...5 {
-                    let event1 = CHHapticEvent(eventType: .hapticContinuous, parameters: [intensity], relativeTime: relativeTimer, duration: 0.5)
-                    relativeTimer += event1.duration + 0.5
-                    events.append(event1)
-                }
-                do {
-                    self.engine = try CHHapticEngine()
-                    let pattern = try CHHapticPattern(events: events, parameters: [])
-                    let player = try self.engine?.makePlayer(with: pattern)
-
-                    try self.engine?.start()
-                    try player?.start(atTime: 0)
-                } catch {
-                    print("Haptic Error: \(error.localizedDescription).")
-                }
+                // TO-DO(Recive on foreground)
             }.store(in: &disposeBag)
         // 노래를 안겹치게 만들기 위한 로직
         // Timer 사용
@@ -55,6 +35,12 @@ final class IntervalViewController: UIViewController {
             .sink { _ in
                 guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
                     return
+                }
+                
+                for player in sceneDelegate.audioPlayers {
+                    if player.startDate < Date() && !player.soundPlayer.isFinish() {
+                        player.soundPlayer.play()
+                    }
                 }
                 
                 var tmp: [Int] = []
@@ -118,7 +104,9 @@ final class IntervalViewController: UIViewController {
         let players = sceneDelegate.audioPlayers.filter { $0.audioPlayer.isPlaying && $0.startDate <= Date() }
         for player in players {
             let scenePlayers = sceneDelegate.audioPlayers.filter { $0.identifier == player.identifier }
-            scenePlayers.forEach { $0.audioPlayer.stop() }
+            scenePlayers.forEach {
+                $0.audioPlayer.stop()
+            }
         }
         let identifiers: [String] = players.map { $0.identifier }
         identifiers.forEach { identifier in
@@ -219,6 +207,7 @@ final class IntervalViewController: UIViewController {
                 
                 player?.prepareToPlay()
                 player?.play(atTime: offset)
+                
                 sceneDelegate.audioPlayers.append(.init(audioPlayer: player!, identifier: date.description, startDate: playerDate))
                 
                 let request = UNNotificationRequest(identifier: playerDate.description, content: content, trigger: trigger)
