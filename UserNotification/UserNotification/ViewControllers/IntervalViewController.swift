@@ -57,6 +57,22 @@ final class IntervalViewController: UIViewController {
                 
                 sceneDelegate.audioPlayers.removeAll { !$0.audioPlayer.isPlaying }
             }.store(in: &disposeBag)
+        
+        Timer.publish(every: 5, tolerance: nil, on: RunLoop.current, in: .default, options: nil)
+            .autoconnect()
+            .sink { value in
+                URLSession.shared.dataTask(with: URLRequest(url: URL(string: "https://www.naver.com")!)) { data, response, error in
+                    let range = 200..<400
+                    guard let response = response, let statusCode = response as? HTTPURLResponse, range.contains(statusCode.statusCode) else {
+                        return
+                    }
+                    
+                    guard let data = data, let _ = String(data: data, encoding: .utf8) else {
+                        return
+                    }
+                }.resume()
+                
+            }.store(in: &disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
