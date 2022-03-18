@@ -178,9 +178,12 @@ final class IntervalViewController: UIViewController {
         
         for i in 0..<4 {
             let content = UNMutableNotificationContent()
+            let category = UNNotificationCategory(identifier: "myNotificationCategory", actions: [], intentIdentifiers: [])
             // repeat이 true일 때는 interval이 60이 넘어야 정상 작동함
             var trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(seconds), repeats: false)
             
+            UNUserNotificationCenter.current().setNotificationCategories([category])
+            content.categoryIdentifier = "myNotificationCategory"
             // 아이콘위 숫자
             content.badge = NSNumber(value: UIApplication.shared.applicationIconBadgeNumber + 1)
             // 유저 노티의 소리(커스텀 파일 가능)
